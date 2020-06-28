@@ -5,6 +5,7 @@ const colors = require('colors');
 module.exports = async (req, res) => {
   try {
     util.log(colors.green(`Cities API : Search: Search Cities for ${JSON.stringify(req.query)}`));
+
     function compareStringsAndAssignScore(stringA, stringB) {
       for (var result = 0, i = stringA.length; i--;) {
         if (typeof stringB[i] == 'undefined' || stringA[i] == stringB[i]);
@@ -21,20 +22,23 @@ module.exports = async (req, res) => {
       return Math.round(finalResult * Math.pow(10, 2)) / Math.pow(10, 2);
 
     }
-    await citiesModel.find().then(scores => {
-      scores.forEach(async function (city) {
-        var scoreValue = await compareStringsAndAssignScore(city.name, req.query.q)
-        await citiesModel.updateOne({
-          "name": city.name
-        }, {
-          $set: {
-            score: scoreValue
-          }
-        });
-      });
-    })
 
-   
+    if (req.query.q) {
+      await citiesModel.find().then(scores => {
+        scores.forEach(async function (city) {
+          var scoreValue = await compareStringsAndAssignScore(city.name, req.query.q)
+          await citiesModel.updateOne({
+            "name": city.name
+          }, {
+            $set: {
+              score: scoreValue
+            }
+          });
+        });
+      })
+    }
+
+
     let suggestions = await citiesModel.find({
       "name": {
         "$regex": req.query.q,
