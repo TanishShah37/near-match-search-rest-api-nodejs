@@ -1,0 +1,47 @@
+{
+  "name": "gameofthrones-battle-api-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cls-hooked": "^4.2.2",
+    "cls-rtracer": "^1.4.0",
+    "colors": "^1.4.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.23.2",
+    "http-status": "^1.4.2",
+    "i": "^0.3.6",
+    "joi": "^14.3.1",
+    "json-beautify": "^1.1.1",
+    "logger": "0.0.1",
+    "mongoose": "^5.8.11",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
+    "npm": "^6.14.5",
+    "pretty-format": "^26.1.0",
+    "querymen": "^2.1.4",
+    "split": "^1.0.1",
+    "tsvtojson": "^1.0.1",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
+}
