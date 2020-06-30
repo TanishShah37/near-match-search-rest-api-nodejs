@@ -23,36 +23,31 @@ module.exports = async (req, res) => {
 
     }
 
-    if (req.query.q) {
-      await citiesModel.find().then(scores => {
-        scores.forEach(async function (city) {
-          var scoreValue = await compareStringsAndAssignScore(city.name, req.query.q)
-          await citiesModel.updateOne({
-            "name": city.name
-          }, {
-            $set: {
-              score: scoreValue
-            }
-          });
-        });
-      })
-    }
+
+    let suggestions = await citiesModel
+      .find(
+        {
+          name: {
+            "$regex": req.query.q,
+            $options: "i",
+          },
+        },
+        {
+          _id: 0,
+          name: 1,
+          country: 1,
+          lat: 1,
+        }
+      )
+
+    suggestions = suggestions
+      .map(city => {
+        city.name +=  +  city.country;
+        city.score = compareStringsAndAssignScore(city.name, req.query.q);
+        return city;
+      }).sort((a, b) => b.score - a.score)
 
 
-    let suggestions = await citiesModel.find({
-      "name": {
-        "$regex": req.query.q,
-        "$options": "i"
-      }
-    }, {
-      _id: 0,
-      name: 1,
-      country: 1,
-      score: 1,
-      lat: 1
-    }).sort({
-      'score': -1
-    })
 
     res.status(200).type('json').send(JSON.stringify({
       suggestions
