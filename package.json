@@ -29,7 +29,7 @@
     "mongoose": "^5.8.11",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
-    "npm": "^6.14.5",
+    "npm": "^6.14.6",
     "pretty-format": "^26.1.0",
     "querymen": "^2.1.4",
     "split": "^1.0.1",
